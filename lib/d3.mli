@@ -50,7 +50,7 @@ val select : string -> ('a, 'a) t
     multiple elements match the selector, only the first matching element in
     document traversal order will be selected.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#select}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#select}D3.js docs} *)
 
 val selectAll : string -> ('a, 'a) t
 (** [selectAll selector] selects descendant elements that match the specified
@@ -60,7 +60,7 @@ val selectAll : string -> ('a, 'a) t
     ancestor node and the group index i to determine the data bindings for the
     subselection.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#selectAll}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#selectAll}D3.js docs} *)
 
 val attr : string -> ('a, string) fn -> ('a, 'a) t
 (** [attr name f] sets the [name] attribute to the specified value on all
@@ -68,7 +68,7 @@ val attr : string -> ('a, string) fn -> ('a, 'a) t
     passing it the current DOM element, the datum attached to the DOM element,
     and the element's index in the selection.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#attr}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#attr}D3.js docs} *)
 
 val classed : string -> ('a, bool) fn -> ('a, 'a) t
 (** [classed class f] sets whether or not [class] is associated with the
@@ -81,7 +81,7 @@ val classed : string -> ('a, bool) fn -> ('a, 'a) t
     spaces. If you want to set several classes at once use a space-separated
     list of class names as the first argument.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#classes}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#classes}D3.js docs} *)
 
 val style : string -> ('a, string) fn -> ('a, 'a) t
 (** [style name f] sets the [name] CSS style property to the specified value on
@@ -89,7 +89,7 @@ val style : string -> ('a, string) fn -> ('a, 'a) t
     passing it the current DOM element, the datum attached to the DOM element,
     and the element's index in the selection.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#style}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#style}D3.js docs} *)
 
 val property : string -> ('a, 'b Js.t ) fn -> ('a, 'a) t
 (** [property name f] sets the [name] property to the specified value on all
@@ -97,7 +97,7 @@ val property : string -> ('a, 'b Js.t ) fn -> ('a, 'a) t
     passing it the current DOM element, the datum attached to the DOM element,
     and the element's index in the selection.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#property}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#property}D3.js docs} *)
 
 val text : ('a, string) fn -> ('a, 'a) t
 (** [text f] sets the text content to the specified value on all selected
@@ -109,7 +109,7 @@ val text : ('a, string) fn -> ('a, 'a) t
     {{:http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent}textContent}
     property; setting the text content will replace any existing child elements.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#text}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#text}D3.js docs} *)
 
 val html : ('a, string) fn -> ('a, 'a) t
 (** [html f] sets the inner HTML content to the specified value on all selected
@@ -124,7 +124,7 @@ val html : ('a, string) fn -> ('a, 'a) t
     content in a data-driven way; this operator is intended for when you want a
     little bit of HTML, say for rich formatting.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#html}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#html}D3.js docs} *)
 
 val append : string -> ('a, 'a) t
 (** [append name] appends a new [name] element as the last child of each
@@ -132,7 +132,7 @@ val append : string -> ('a, 'a) t
     appended elements. Each new element inherits the data of the current
     elements in the same manner as {!select}.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#append}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#append}D3.js docs} *)
 
 val insert : before:string -> string -> ('a, 'a) t
 (** [insert ~before name] inserts a new [name] element before
@@ -142,14 +142,14 @@ val insert : before:string -> string -> ('a, 'a) t
     element inherits the data of the current elements (if any), in the same
     manner as {!select}.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#insert}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#insert}D3.js docs} *)
 
 val remove : ('a, 'a) t
 (** [remove] removes the elements in the current selection from the current
     document. Returns the current selection (the same elements that were
     removed) which are now "off-screen", detached from the DOM.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#remove}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#remove}D3.js docs} *)
 
 val static : string -> ('a, 'a) t
 (** [static name] appends a new [name] element as the last child of each
@@ -171,10 +171,10 @@ val static : string -> ('a, 'a) t
 (** {2 Data Binding} *)
 
 val data  : ('a -> int -> 'b list) -> ('a, 'b) t
-(** {{:https://github.com/mbostock/d3/wiki/Selections#data}D3.js docs} *)
+(** {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#data}D3.js docs} *)
 
 val datum : ('a -> int -> 'b) -> ('a, 'b) t
-(** {{:https://github.com/mbostock/d3/wiki/Selections#datum}D3.js docs} *)
+(** {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#datum}D3.js docs} *)
 
 val enter : ('a, 'a) t
 (** [enter] returns the enter selection: placeholder nodes for each data
@@ -182,7 +182,7 @@ val enter : ('a, 'a) t
     current selection. This operation can only be composed below an update
     selection, which is produced by the {!data} operator.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#enter}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#enter}D3.js docs} *)
 
 val update : ('a, 'a) t
 (** [update] is a NOOP operation. It leaves the parent selection unchanged and
@@ -196,7 +196,7 @@ val exit : ('a, 'a) t
     be composed below an update selection, which is produced by the {!data}
     operator.
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#exit}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#exit}D3.js docs} *)
 
 (** {2 Selection manipulation} *)
 
@@ -204,18 +204,18 @@ val filter : ('a, bool) fn -> ('a, 'a) t
 (** [filter f] returns a new selection that contains only the elements for
     which [f] evaluates to [true].
 
-    {{:https://github.com/mbostock/d3/wiki/Selections#filter}D3.js docs} *)
+    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#filter}D3.js docs} *)
 
 val sort : ('a -> 'a -> int) -> ('a, 'a) t
 (** [sort f] sorts the elements in the current selection according to the
     comparator function, and then re-inserts the document elements to match.
 
-   {{:https://github.com/mbostock/d3/wiki/Selections#sort}D3.js docs} *)
+   {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#sort}D3.js docs} *)
 
 val each : ('a, unit) fn -> ('a, 'a) t
 (** [each f] invokes [f] for each element in the current selection.
 
-   {{:https://github.com/mbostock/d3/wiki/Selections#each}D3.js docs} *)
+   {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#each}D3.js docs} *)
 
 val transition : ('a, 'a) t
 
