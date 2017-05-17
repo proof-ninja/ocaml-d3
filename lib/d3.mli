@@ -218,18 +218,30 @@ val each : ('a, unit) fn -> ('a, 'a) t
    {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#each}D3.js docs} *)
 
 val transition : ('a, 'a) t
+(** [transition] starts a transition for the current selection. 
+    Transitions behave much like selections, except operators animate smoothly over time 
+    rather than applying instantaneously.
+
+   {{:https://github.com/d3/d3-3.x-api-reference/blob/master/Selections.md#transition}D3.js docs} *)
 
 (** {2 Composition operators} *)
 
 val (|.)  : ('a, 'b) t -> ('b, 'c) t -> ('a, 'c) t
 val (<.>) : ('a, 'b) t -> ('b, 'c) t -> ('a, 'c) t
 (** [x |. y] is the equivalent of method chaining operators [x] and [y] in
-    JavaScript. [<.>] is an alias for [|.]. *)
+    JavaScript. [<.>] is an alias for [|.]. 
+
+   [|.] and [<.>] have the same precedence and the both are left associative.
+*)
 
 val (|-)  : ('a, 'b) t -> ('b, 'c) t -> ('a, 'b) t
+(** With [|-], you can write [u |- x |- y] for JS's [u.x; u.y] *)
 
 val chain : ('a, 'a) t list -> ('a, 'a) t
+(** chain [x; y; z] is equal to [x |. y |. z] *)
+
 val seq   : ('a, 'a) t list -> ('a, 'a) t
+(** seq [x; y; z] is equal to [x |- y |- z] *)
 
 val nest  : ('a, 'b) t -> ('b, 'b) t list -> ('a, 'b) t
 (** [nest x ys] is equivalent to [x |- seq ys]. *)
