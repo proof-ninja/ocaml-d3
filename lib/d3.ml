@@ -36,29 +36,35 @@ type 'a s = S
 type ('a, 'b) t = 'a s -> 'b s
 type ('a, 'b) fn = Dom.node Js.t -> 'a -> int -> 'b
 
+(* d3.select(<arg>) *)
 let d3_select arg =
   Js.Unsafe.(meth_call global##d3 "select" [| inject arg |])
 ;;
 
+(* .. .<meth>(<name>,<f>) *)
 let name_call (meth:string) (name:string) f =
   let open Js.Unsafe in
   let name = Js.string name in
   fun cxt -> meth_call cxt meth [| inject name; inject f |]
 ;;
 
+(* .. .<meth>(<arg>) *)
 let const_call (meth:string) arg cxt =
   Js.(Unsafe.meth_call cxt meth [| Unsafe.inject arg |])
 ;;
 
+(* .. .<meth>() *)
 let thunk_call (meth:string) cxt =
   Js.Unsafe.meth_call cxt meth [| |]
 ;;
 
 let mb = Js.wrap_meth_callback
 
+(* .. .select(<name>) *)
 let select    name = const_call "select"    (Js.string name)
 let selectAll name = const_call "selectAll" (Js.string name)
 
+(* .. .attr(<name>, <f>) *)
 let attr     name f = name_call "attr"     name (mb (fun this d i () -> Js.string (f this d i)))
 let classed  name f = name_call "classed"  name (mb (fun this d i () -> Js.bool   (f this d i)))
 let style    name f = name_call "style"    name (mb (fun this d i () -> Js.string (f this d i)))
@@ -81,6 +87,8 @@ let exit   : ('a, 'a) t = thunk_call "exit"
 let filter f = const_call "filter" (mb (fun this d i () -> Js.bool (f this d i)))
 let sort   f = const_call "sort"   f
 let each   f = const_call "each"   (mb (fun this d i () -> (f this d i)))
+
+let transition : ('a, 'a) t = thunk_call "transition"
 
 let str f name x = f name (fun _ _ _ -> x)
 let int f name x = str f name (string_of_int x)

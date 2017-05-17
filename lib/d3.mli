@@ -217,6 +217,8 @@ val each : ('a, unit) fn -> ('a, 'a) t
 
    {{:https://github.com/mbostock/d3/wiki/Selections#each}D3.js docs} *)
 
+val transition : ('a, 'a) t
+
 (** {2 Composition operators} *)
 
 val (|.)  : ('a, 'b) t -> ('b, 'c) t -> ('a, 'c) t
