@@ -94,21 +94,6 @@ let str f name x = f name (fun _ _ _ -> x)
 let int f name x = str f name (string_of_int x)
 let flt f name x = str f name (string_of_float x)
 
-(* 
-
-var circle = svg.selectAll("circle")
-  .data(data);
-
-circle.exit().remove();
-
-circle.enter().append("circle")
-    .attr("r", 2.5)
-  .merge(circle)
-    .attr("cx", function(d) { return d.x; })
-    .attr("cy", function(d) { return d.y; });
-
-=> circle |. _seq (exit |. remove) (enter |. ...)
-*)
 let _seq u v =
   fun cxt ->
     let _ = u cxt in
@@ -121,6 +106,7 @@ let (<.>) = (|.)
 (* [u |- v] is like [u.v; u ..] *)
 let (|-) u v = u <.> (_seq v update)
 
+(* chain [a;b;c] = update |. a |. b |. c *)
 let chain l =
   let rec loop l acc =
     match l with
@@ -131,6 +117,7 @@ let chain l =
   in
   loop l update
 
+(* seq [a;b;c] = x.a; x.b; x.c in JS *)
 let seq l =
   let rec loop l acc =
     match l with

@@ -232,6 +232,8 @@ val (<.>) : ('a, 'b) t -> ('b, 'c) t -> ('a, 'c) t
     JavaScript. [<.>] is an alias for [|.]. 
 
    [|.] and [<.>] have the same precedence and the both are left associative.
+
+   [|.] and [<.>] are commutative: [(a |. b) |. c = a |. (b |. c)]
 *)
 
 val (|-)  : ('a, 'b) t -> ('b, 'c) t -> ('a, 'b) t
@@ -241,7 +243,7 @@ val chain : ('a, 'a) t list -> ('a, 'a) t
 (** chain [x; y; z] is equal to [x |. y |. z] *)
 
 val seq   : ('a, 'a) t list -> ('a, 'a) t
-(** seq [x; y; z] is equal to [x |- y |- z] *)
+(** a |. seq [x; y; z] |. b is equal to [a.x; a.y; a.z.b] in JS *)
 
 val nest  : ('a, 'b) t -> ('b, 'b) t list -> ('a, 'b) t
 (** [nest x ys] is equivalent to [x |- seq ys]. *)
