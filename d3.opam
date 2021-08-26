@@ -1,0 +1,19 @@
+opam-version: "2.0"
+name: "d3"
+version: "0.3.1"
+maintainer: "Jun Furuse <jun.furuse@gmail.com>"
+authors: [ "Spiros Eliopoulos <seliopou@gmail.com>" ]
+synopsis: "OCaml bindings for D3.js"
+license: "BSD-3-clause"
+homepage: "https://github.com/camlspotter/ocaml-d3"
+dev-repo: "git://https://github.com/camlspotter/ocaml-d3.git"
+bug-reports: "https://github.com/camlspotter/ocaml-d3/issues"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "js_of_ocaml" { >= "3.9.0" }
+  "js_of_ocaml-ppx" { >= "3.9.0" }
+  "js_of_ocaml-compiler" { >= "3.9.1" }
+  "ocaml" { >= "4.11.0" }
+]
