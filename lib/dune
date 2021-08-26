@@ -1,0 +1,9 @@
+(library
+ (name d3)
+ (public_name d3)
+ (libraries js_of_ocaml)
+ (wrapped false)
+ (preprocess (pps js_of_ocaml-ppx))
+)
+
+ 

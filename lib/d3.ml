@@ -30,14 +30,15 @@
     ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
     POSSIBILITY OF SUCH DAMAGE.
   ----------------------------------------------------------------------------*)
+open Js_of_ocaml
 
-type 'a s = S
+type 'a s = S [@@ocaml.warning "-37"]
 
 type ('a, 'b) t = 'a s -> 'b s
 type ('a, 'b) fn = Dom.node Js.t -> 'a -> int -> 'b
 
 let d3_select arg =
-  Js.Unsafe.(meth_call global##d3 "select" [| inject arg |])
+  Js.Unsafe.(meth_call global##.d3 "select" [| inject arg |])
 ;;
 
 let name_call (meth:string) (name:string) f =
@@ -69,18 +70,20 @@ let html f = const_call "html" (mb (fun this d i () -> Js.string (f this d i)))
 
 let append name         = const_call "append" (Js.string name)
 let insert ~before name = name_call  "insert" name (Js.string before)
-let remove : ('a, 'a) t = thunk_call "remove"
+let remove : ('a, 'a) t = fun a -> thunk_call "remove" a
 
 let datum f = const_call "datum" (fun d i -> f d i)
 let data  f = const_call "data"  (fun d i -> Js.array (Array.of_list (f d i)))
 
-let enter  : ('a, 'a) t = thunk_call "enter"
+let enter  : ('a, 'a) t = fun a -> thunk_call "enter" a
 let update : ('a, 'a) t = fun x -> x
-let exit   : ('a, 'a) t = thunk_call "exit"
+let exit   : ('a, 'a) t = fun a -> thunk_call "exit" a
 
 let filter f = const_call "filter" (mb (fun this d i () -> Js.bool (f this d i)))
 let sort   f = const_call "sort"   f
 let each   f = const_call "each"   (mb (fun this d i () -> (f this d i)))
+
+let transition : ('a, 'a) t = fun a -> thunk_call "transition" a
 
 let str f name x = f name (fun _ _ _ -> x)
 let int f name x = str f name (string_of_int x)
@@ -142,7 +145,7 @@ module E = struct
   type ('event, 'a) handler = 'event Js.t -> 'a -> int -> unit
 
   let _handler name f =
-    let f' d i = f Js.Unsafe.global##d3##event d i in
+    let f' d i = f Js.Unsafe.global##.d3##.event d i in
     fun cxt -> name_call "on" name f' cxt
   ;;
 
@@ -180,7 +183,7 @@ module E = struct
   let handle name f = _handler name f
 end
 
-let run ?(node=Js.Unsafe.global##document##documentElement) t data =
+let run ?(node=Js.Unsafe.global##.document##.documentElement) t data =
   let cxt =
     let open Js.Unsafe in
     meth_call

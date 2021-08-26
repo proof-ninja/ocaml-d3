@@ -31,6 +31,8 @@
     POSSIBILITY OF SUCH DAMAGE.
   ----------------------------------------------------------------------------*)
 
+open Js_of_ocaml
+
 (** js_of_ocaml bindings for the D3.js library. *)
 
 type ('a, 'b) t
@@ -216,6 +218,8 @@ val each : ('a, unit) fn -> ('a, 'a) t
 (** [each f] invokes [f] for each element in the current selection.
 
    {{:https://github.com/mbostock/d3/wiki/Selections#each}D3.js docs} *)
+
+val transition : ('a, 'a) t
 
 (** {2 Composition operators} *)
 
