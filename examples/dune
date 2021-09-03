@@ -1,0 +1,5 @@
+(executables
+  (names rectangle todo)
+  (modes js)
+  (libraries js_of_ocaml js_of_ocaml-lwt yojson lwt d3)
+  (preprocess (pps js_of_ocaml-ppx)))
